@@ -1,29 +1,43 @@
-import Cronometro from "./../model/cronometro.model.js";
+import Cronometro from "./../model/Cronometro.model.js";
 
 class CronometroController {
     tempo(req, res) {
-        return res.send(Cronometro.tempoAtual);
+        return res.json(Cronometro);
     }
 
     iniciar(req, res) {
         Cronometro.iniciarCronometro();
-        return res.send(`Cronômetro iniciado!`);
+        return res.json(Cronometro);
     };
 
     pausar(req, res) {
-        Cronometro.rodando = false;
-        return res.send("Cronômetro pausado!");
+        Cronometro.pausar();
+        return res.json(Cronometro);
     };
 
     continuar(req, res) {
-        Cronometro.rodando = true;
-        return res.send("Cronômetro continuando!");
+        Cronometro.continuar()
+        return res.json(Cronometro);
     }
 
     zerar(req, res) {
-        Cronometro.minutos = 0;
-        Cronometro.segundos = 0;
-        return res.send("Cronômetro zerado!");
+        Cronometro.zerar();
+        return res.json(Cronometro);
+    }
+    
+    marcarTempo(req, res) {
+        try{
+            const tempoMarcado = Cronometro.marcar();
+            console.log(tempoMarcado)
+            return res.json(tempoMarcado);
+        } catch(erro) {
+            res.json({Message: erro.message})
+        }
+        
+    }
+
+    marcadores(req, res) {
+        return res.json(Cronometro.marcadores);
     }
 }
 
