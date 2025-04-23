@@ -2,42 +2,54 @@ import Cronometro from "./../model/Cronometro.model.js";
 
 class CronometroController {
     tempo(req, res) {
-        return res.json(Cronometro);
+        return res.status(200).json(Cronometro.informacoesCronometro());
     }
 
     iniciar(req, res) {
-        Cronometro.iniciarCronometro();
-        return res.json(Cronometro);
+        try {
+            return res.status(200).json({
+                Tempo: Cronometro.toString(),
+                situacao: Cronometro.play()
+            });
+        } catch(err){
+            return res.status(400).json({Message: err.message});
+        }
+        
     };
 
     pausar(req, res) {
-        Cronometro.pausar();
-        return res.json(Cronometro);
+        try {
+            return res.status(200).json({
+            Tempo: Cronometro.toString(),
+            situacao: Cronometro.pausar()
+        });
+        } catch (err) {
+            return res.status(400).json({Message: err.message});
+        }
+        
     };
 
-    continuar(req, res) {
-        Cronometro.continuar()
-        return res.json(Cronometro);
-    }
-
     zerar(req, res) {
-        Cronometro.zerar();
-        return res.json(Cronometro);
+        try {
+            Cronometro.zerar();
+            return res.status(200).json(Cronometro.informacoesCronometro());
+        } catch (err) {
+            return res.status(400).json({Message: err.message});
+        }
+        
     }
     
     marcarTempo(req, res) {
         try{
             const tempoMarcado = Cronometro.marcar();
-            console.log(tempoMarcado)
-            return res.json(tempoMarcado);
+            return res.status(200).json(tempoMarcado);
         } catch(erro) {
-            res.json({Message: erro.message})
+            res.status(400).json({Message: erro.message})
         }
-        
     }
 
     marcadores(req, res) {
-        return res.json(Cronometro.marcadores);
+        return res.status(200).json({Marcadores: Cronometro.marcadores});
     }
 }
 
