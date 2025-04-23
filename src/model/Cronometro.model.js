@@ -12,10 +12,11 @@ class Tempo {
 
 // Model da classe Cronometro
 class Cronometro extends Tempo{
-    //os atributos da classe Cronometro 
+    //os atributos da classe Cronometro com encapsulamento
     #situacao
     #marcadores
     #intervaldisparado
+    // construtor da classe chamando o constructor de Tempo e com os atributos marcadores, situacao, intervalDisparado
     constructor(horas, minutos, segundos, milisegundos) {
         super(horas, minutos, segundos, milisegundos);
         this.marcadores = [];
@@ -23,34 +24,35 @@ class Cronometro extends Tempo{
         this.intervalDisparado = false;
     }
 
+    // Get do atributo marcadores
     get marcadores() {
         return this.#marcadores
     }
-    
+    // Set do atributo marcadores
     set marcadores(marcadores) {
         this.#marcadores = marcadores;
     }
-
+    // Get do atributo situacao
     get situacao() {
         return this.#situacao;
     }
-    
+    // Set do atributo situacao
     set situacao(situacao) {
         this.#situacao = situacao;
     }
-
+    // Get do atributo intervalDisparado
     get intervalDisparado() {
         return this.#intervaldisparado;
     }
-
+    // Set do atributo intervalDisparado
     set intervalDisparado(intervalDisparado) {
         this.#intervaldisparado = intervalDisparado;
     }
-
+    // Método que reseta os marcadores
     resetarMarcadores() {
         this.marcadores = [];
     }
-
+    // Método que retorna as informações do cronômetro
     informacoesCronometro() {
         return {
             Tempo: this.toString(),
@@ -58,7 +60,7 @@ class Cronometro extends Tempo{
             marcadores: this.marcadores
         };
     }
-
+    // Método para marcar tempo
     marcar() {
         if(this.situacao === situacaoCronometroENUM.zerado) {
             throw new Error("Inicie o cronometro primeiro, para poder marcar o tempo!");
@@ -73,7 +75,7 @@ class Cronometro extends Tempo{
         this.marcadores.push(tempo);
         return tempo;
     }
-
+    // Método para dar play e rodar o cronômetro
     play() {
         if(this.situacao === situacaoCronometroENUM.rodando) {
             throw new Error("O cronometro ja esta rodando!");
@@ -106,7 +108,7 @@ class Cronometro extends Tempo{
         }
         return this.situacao
     }
-
+    // Método para pausar o cronômetro
     pausar() {
         if(this.#situacao === situacaoCronometroENUM.zerado) {
             throw new Error("O cronometro não foi iniciado ");
@@ -117,6 +119,7 @@ class Cronometro extends Tempo{
         this.situacao = situacaoCronometroENUM.pausado;
         return this.situacao
     }
+    // Método para zerar o cronômetro
     zerar() {
         if(this.#situacao === situacaoCronometroENUM.zerado) {
             throw new Error("Inicie o cronometro primeiro!");
@@ -128,7 +131,7 @@ class Cronometro extends Tempo{
         this.segundos = 0;
         this.milisegundos = 0;
     }
-
+    // Metodo toString, onde retornamos o tempo do cronômetro
     toString() {
         const format = (num) => String(num).padStart(2, "0");
         return `${format(this.horas)}:${format(this.minutos)}:${format(this.segundos)}.${format(this.milisegundos)}`;

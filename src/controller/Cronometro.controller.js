@@ -1,10 +1,11 @@
 import Cronometro from "./../model/Cronometro.model.js";
 
 class CronometroController {
+    // Retorna o estado atual do cronômetro
     tempo(req, res) {
         return res.status(200).json(Cronometro.informacoesCronometro());
     }
-
+    // Inicia o cronômetro
     iniciar(req, res) {
         try {
             return res.status(200).json({
@@ -16,7 +17,7 @@ class CronometroController {
         }
         
     };
-
+    // Pausa o cronômetro
     pausar(req, res) {
         try {
             return res.status(200).json({
@@ -28,7 +29,7 @@ class CronometroController {
         }
         
     };
-
+    // Zera o cronômetro
     zerar(req, res) {
         try {
             Cronometro.zerar();
@@ -38,7 +39,7 @@ class CronometroController {
         }
         
     }
-    
+    // Marca o tempo atual
     marcarTempo(req, res) {
         try{
             const tempoMarcado = Cronometro.marcar();
@@ -47,7 +48,7 @@ class CronometroController {
             res.status(400).json({Message: erro.message})
         }
     }
-
+    // Retorna os tempos marcados
     marcadores(req, res) {
         return res.status(200).json({Marcadores: Cronometro.marcadores});
     }
