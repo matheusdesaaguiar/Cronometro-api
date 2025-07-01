@@ -81,7 +81,6 @@ class Cronometro extends Tempo{
             throw new Error("O cronometro ja esta rodando!");
         }
         this.situacao = situacaoCronometroENUM.rodando;
-        this.resetarMarcadores();
         if(!this.intervalDisparado) {
             setInterval(() => {
                 if(this.situacao != situacaoCronometroENUM.pausado && this.situacao != situacaoCronometroENUM.zerado) {
@@ -130,7 +129,9 @@ class Cronometro extends Tempo{
         this.minutos = 0;
         this.segundos = 0;
         this.milisegundos = 0;
+        this.resetarMarcadores();
     }
+    
     // Metodo toString, onde retornamos o tempo do cronômetro
     toString() {
         const format = (num) => String(num).padStart(2, "0");
