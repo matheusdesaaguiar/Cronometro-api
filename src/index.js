@@ -6,10 +6,10 @@ import cors from "cors";
 
 const cors_config = {origin: "*"}
 
-app.use(cors(cors_config));
 // instânciação do express
 const app = express();
 
+app.use(cors(cors_config));
 // Caminho do servidor
 app.use("/cronometro", cronometro);
 
