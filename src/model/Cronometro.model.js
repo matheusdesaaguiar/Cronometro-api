@@ -8,6 +8,15 @@ class Tempo {
         this.segundos = segundos;
         this.milisegundos = milisegundos;
     }
+
+    get tempo() {
+        return {
+            horas: this.horas,
+            minutos: this.minutos,
+            segundos: this.segundos,
+            milisegundos: this.milisegundos
+        }
+    }
 }
 
 // Model da classe Cronometro
@@ -55,7 +64,10 @@ class Cronometro extends Tempo{
     // Método que retorna as informações do cronômetro
     informacoesCronometro() {
         return {
-            Tempo: this.toString(),
+            hora: this.horas,
+            minutos: this.minutos,
+            segundos: this.segundos,
+            milisegundos: this.milisegundos,
             situacao: this.situacao,
             marcadores: this.marcadores
         };

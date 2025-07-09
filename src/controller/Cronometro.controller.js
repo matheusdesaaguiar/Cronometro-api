@@ -8,10 +8,8 @@ class CronometroController {
     // Inicia o cronômetro
     iniciar(req, res) {
         try {
-            return res.status(200).json({
-                Tempo: Cronometro.toString(),
-                situacao: Cronometro.play()
-            });
+            Cronometro.play()
+            return res.status(200).json(Cronometro.informacoesCronometro());
         } catch(err){
             return res.status(400).json({Message: err.message});
         }
@@ -19,11 +17,10 @@ class CronometroController {
     };
     // Pausa o cronômetro
     pausar(req, res) {
+        
         try {
-            return res.status(200).json({
-            Tempo: Cronometro.toString(),
-            situacao: Cronometro.pausar()
-        });
+            Cronometro.pausar();
+            return res.status(200).json(Cronometro.informacoesCronometro());
         } catch (err) {
             return res.status(400).json({Message: err.message});
         }
