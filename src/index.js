@@ -2,7 +2,11 @@
 import express from "express";
 // importação das rotas criadas
 import cronometro from "./routes/cronometro.routes.js";
+import cors from "cors";
 
+const cors_config = {origin: "*"}
+
+app.use(cors(cors_config));
 // instânciação do express
 const app = express();
 
